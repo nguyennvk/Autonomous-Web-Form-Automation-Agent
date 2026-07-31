@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Three Section Medical Form</title>
+  </head>
+  <body>
+    <nav>
+      <button aria-label="Section 1" data-section="1">Section 1</button>
+      <button aria-label="Section 2" data-section="2">Section 2</button>
+      <button aria-label="Section 3" data-section="3">Section 3</button>
+    </nav>
+    <main id="section"></main>
+
+    <script>
+      const state = { section: 1 };
+      const root = document.getElementById("section");
+
+      function render() {
+        if (state.section === 1) {
+          root.innerHTML = `
+            <h2>Patient</h2>
+            <label>First Name <input name="first_name" aria-label="First Name" /></label>
+            <label>Last Name <input name="last_name" aria-label="Last Name" /></label>
+          `;
+        } else if (state.section === 2) {
+          root.innerHTML = `
+            <h2>Insurance</h2>
+            <label>Plan
+              <select name="insurance_plan" aria-label="Insurance Plan">
+                <option value="">Choose</option>
+                <option value="Premium">Premium</option>
+              </select>
+            </label>
+            <label>Policy Number <input name="policy_number" aria-label="Policy Number" /></label>
+          `;
+        } else {
+          root.innerHTML = `
+            <h2>Notes</h2>
+            <label>Notes <textarea name="notes" aria-label="Notes"></textarea></label>
+            <button type="submit" aria-label="Submit">Submit</button>
+          `;
+        }
+      }
+
+      document.addEventListener("click", (event) => {
+        const target = event.target;
+        if (!(target instanceof HTMLElement)) return;
+
+        const section = target.dataset.section;
+        if (section) {
+          state.section = Number(section);
+          render();
+          return;
+        }
+
+        if (target.matches('button[type="submit"]')) {
+          document.body.innerHTML = '<h1>Submission successful</h1>';
+        }
+      });
+
+      render();
+    </script>
+  </body>
+</html>
