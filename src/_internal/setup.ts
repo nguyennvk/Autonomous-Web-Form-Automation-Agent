@@ -26,7 +26,7 @@ type PageObservation = {
 
 export const ProvidedValuesSchema = z.record(
   z.string(),
-  z.union([z.string(), z.number(), z.boolean(), z.null()])
+  z.union([z.string(), z.number(), z.boolean(), z.null(), z.array(z.string())])
 );
 
 export type ProvidedValuesSchemaType = z.infer<typeof ProvidedValuesSchema>;
@@ -43,8 +43,13 @@ export async function observePage(page: Page): Promise<PageObservation> {
       "[role='button']",
       "[role='checkbox']",
       "[role='radio']",
+      "[role='combobox']",
+      "[role='option']",
+      "[role='listbox']",
+      "[aria-autocomplete]",
+      "[aria-expanded]",
       "[contenteditable='true']",
-    ].join(",");
+  ].join(",");
 
     const elements = Array.from(
       document.querySelectorAll<HTMLElement>(selector)
