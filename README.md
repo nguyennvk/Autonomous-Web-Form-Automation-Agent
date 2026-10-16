@@ -1,11 +1,6 @@
 # Autonomous Medical Form Agent
 
-A TypeScript automation agent that uses **Playwright** and **Google Gemini** to inspect, complete, and submit the Magical medical form:
 Author: Nguyen Vo Khoi Nguyen
-
-```text
-https://magical-medical-form.netlify.app/
-```
 
 ## Key Features
 
